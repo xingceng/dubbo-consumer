@@ -1,91 +1,67 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page isELIgnored="false" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%--
+  Created by IntelliJ IDEA.
+  User: Simpon
+  Date: 2019/3/18
+  Time: 10:49
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<meta name="keywords"
-      content="Internship Sign In & Sign Up Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements"/>
-<script type="application/x-javascript"> addEventListener("load", function () {
-    setTimeout(hideURLbar, 0);
-}, false);
-
-function hideURLbar() {
-    window.scrollTo(0, 1);
-} </script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/login/js/jquery-2.1.4.min.js"></script>
-<!-- Custom Theme files -->
-<link href="<%=request.getContextPath()%>/login/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-<link href="<%=request.getContextPath()%>/login/css/snow.css" rel="stylesheet" type="text/css" media="all"/>
-<link href="<%=request.getContextPath()%>/login/css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>hello</title>
-
+    <title>Title</title>
+    <!-- 引入easyui样式文件 -->
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/jquery-easyui-1.5/themes/default/easyui.css">
+    <!-- 引入easyui图标样式文件 -->
+    <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/jquery-easyui-1.5/themes/icon.css">
+    <!-- 引入jquery js文件 -->
+    <script type="text/javascript" src="<%=request.getContextPath() %>/jquery-easyui-1.5/jquery.min.js"></script>
+    <!-- 引入easyui的js文件 -->
+    <script type="text/javascript" src="<%=request.getContextPath() %>/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+    <!-- 引文easyui支持中文js -->
+    <script type="text/javascript" src="<%=request.getContextPath() %>/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
-<div class="snow-container">
-    <div class="snow foreground"></div>
-    <div class="snow foreground layered"></div>
-    <div class="snow middleground"></div>
-    <div class="snow middleground layered"></div>
-    <div class="snow background"></div>
-    <div class="snow background layered"></div>
+<!-- 定义登录框 -->
+<div class="easyui-dialog" data-options="width:300,height:200,closable:false,title:'系统登录',iconCls:'icon-tip',buttons:'#button'">
+    <form id="loginForm" method="post">
+        <table>
+            <tr>
+                <td>用户名</td>
+                <td>
+                    <input class="easyui-textbox" name="username" data-options="required:true,iconCls:'icon-man'">
+                </td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td>
+                    <input class="easyui-passwordbox" name="password" data-options="required:true,iconCls:'icon-lock'">
+                </td>
+            </tr>
+        </table>
+    </form>
 </div>
-<div class="top-buttons-agileinfo">
+<!-- 按钮 -->
+<div id="button">
+    <a href="javascript:login()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">登录</a>
+    <a href="javascript:toReg()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">注册</a>
 </div>
-<br><br><br><br><br>
-<div class="main-agileits">
-    <!--form-stars-here-->
-    <div class="form-w3-agile">
-        <h2 class="sub-agileits-w3layouts">登录</h2>
-        <form id="loginForm">
-            <input type="text" id="staffname" name="username" placeholder="用户" required=""/>
-            <input type="password" id="staffpass" name="password" placeholder="密码" required=""/>
-            <P>${message }</P>
-            <div class="submit-w3l">
-                <input type="button" value="登录🔏" id="loginButton"/>
-            </div>
-        </form>
-    </div>
-</div>
-<!--//form-ends-here-->
-<!-- copyright -->
-<div class="copyright w3-agile">
-    <p><a> © shiro-test</a></p>
-</div>
-<!-- //copyright -->
-<script type="text/javascript">
-    $("#loginButton").on("click", function () {
-        $.ajax({
-            url: "<%=request.getContextPath()%>/loginuser",
-            type: "post",
-            data: $("#loginForm").serialize(),
-            dataType: "text",
-            success: function (loginFlag) {
-                //用户名不存在
-                if (loginFlag == "userNameNO") {
-                    alert("用户名不存在");
+</body>
+<script>
+    //跳到注册页面
+    function toReg(){
+        location.href="<%=request.getContextPath() %>/register.jsp";
+    }
+    //登录
+    function login(){
+        $("#loginForm").form("submit",{
+            url:"login.",
+            success:function(data){
+                $.messager.alert("提示",data,"info");
+                if(data=="登录成功"){
+                    location.href="<%=request.getContextPath() %>/page/main.do";
                 }
-                //密码错误
-                if (loginFlag == "userPassNo") {
-                    alert("密码错误")
-                }
-                //登录成功
-                if (loginFlag == "loginSuccess") {
-                    alert("登陆成功")
-                    location.href = "/login/toIndex";
-
-                }
-            },
-            error: function () {
-                alert("程序错误");
             }
         })
-    });
+    }
 </script>
-</body>
 </html>
