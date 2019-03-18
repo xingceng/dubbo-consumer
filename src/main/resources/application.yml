@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /login
+  port: 8080
+
+spring:
+  mvc:
+    view:
+      suffix: ".jsp"
+      prefix: "/WEB-INF/"
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/1807a
