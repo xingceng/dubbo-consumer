@@ -2,13 +2,16 @@ package com.jk.controller;
 
 
 
-import com.jk.model.House;
+import com.jk.model.*;
+import com.jk.service.HouseRwjService;
 import com.jk.service.ZhyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 @RestController
@@ -17,6 +20,8 @@ public class ZhyController {
     @Autowired
     private ZhyService zhyService;
 
+    @Autowired
+    private HouseRwjService houseRwjService;
 
 
     //查询面积
@@ -69,9 +74,37 @@ public class ZhyController {
 
     //新增房源
     @RequestMapping("addHouse")
-    public void addHouse(House house){
+
+    public String  addHouse(House house , Model model){
+        List<Acreage> list = houseRwjService.queryAcreage();
+        model.addAttribute("bb",list);
+
+        List<Louceng> list2= houseRwjService.queryLouCeng();
+        model.addAttribute("ee",list2);
+
+        List<Louling> list3 = houseRwjService.queryLouLing();
+        model.addAttribute("hh",list3);
+
+        List<Privace> list4 = houseRwjService.queryPrice();
+        model.addAttribute("aa",list4);
+
+        List<Zhuangxiu> list5 = houseRwjService.queryZhuangxiu();
+        model.addAttribute("ii",list5);
+
+        List<Unit> list6 = houseRwjService.queryHuxing();
+        model.addAttribute("cc",list6);
+
+        List<Mianxiang> list7 = houseRwjService.queryMianxiang();
+        model.addAttribute("ff",list7);
         zhyService.addHouse(house);
+        return  "House/ershoufang";
     }
+
+
+
+
+
+
 
 
 

@@ -16,5 +16,5 @@
     <dubbo:reference id="myService" interface="com.jk.service.LoginService"/>
 
     <dubbo:reference id="zhyService" interface="com.jk.service.ZhyService"/>
-
+    <dubbo:reference id="rwjService" interface="com.jk.service.HouseRwjService"/>
 </beans>

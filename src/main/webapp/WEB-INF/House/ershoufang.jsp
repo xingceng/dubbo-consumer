@@ -124,17 +124,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td>朝向</td>
-                <td>
-                    <select>
-                        <option value="0" selected>请选择
-                            <c:forEach items="${gg}" var="c">
-                        <option value="${c.mianxiangid}"  >${c.mianxiangname}</option>
-                        </c:forEach>
-                    </select>
-                </td>
-            </tr>
 
             <tr>
                 <td>楼龄</td>
