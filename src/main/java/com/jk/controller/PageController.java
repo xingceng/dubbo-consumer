@@ -14,4 +14,29 @@ public class PageController {
     public String toIndex() {
         return "index";
     }
+
+    @RequestMapping("/ershoufang")
+    public String toErshoufang() {
+        return "House/ershoufang";
+    }
+
+    @RequestMapping("/gongyu")
+    public String toGongyu() {
+        return "House/gongyu";
+    }
+
+    @RequestMapping("/zufang")
+    public String toZufang() {
+        return "House/zufang";
+    }
+
+    @RequestMapping("/xinfang")
+    public String toXinfang() {
+        return "House/xinfang";
+    }
+
+    @RequestMapping("/haiwai")
+    public String toHaiwai() {
+        return "House/haiwai";
+    }
 }

@@ -41,7 +41,7 @@
 
     //查询
     $("#MyTable").datagrid({
-        url:"<%=request.getContextPath()%>/queryFangwu?housetype="+'4',
+        url:"<%=request.getContextPath()%>/queryFangwu?typeid="+'4',
         columns:[[
             {field:'check',checkbox:true},
             {field:'houseid',title:'编号',width:100,align:'center'},
@@ -51,17 +51,15 @@
             {field:'acreagename',title:'面积',width:100,align:'center'},
             {field:'unitname',title:'户型',width:100,align:'center'},
             {field:'yongtuname',title:'用途',width:100,align:'center'},
-            {field:'zhuangxiuname',title:'用途',width:100,align:'center'},
-            {field:'housestuts',title:'状态',width:100,align:'center'},
-            {field:'houseyongtuid',title:'用途',width:100,align:'center'},
-            {field:'housestuts',title:'用途',width:100,align:'center',formatter:function(value,row,index){
-                if(housestuts==0){
-                    return "未出租"
-                }
-                if(housestuts==1){
-                    return "已出租"
-                }
-            }},
+            {field:'zhuangxiuname',title:'装修',width:100,align:'center'},
+            {field:'housestuts',title:'状态',width:100,align:'center',formatter:function(value,row,index){
+                    if(value==0){
+                        return "未出租"
+                    }
+                    if(value==1){
+                        return "已出租"
+                    }
+                }},
 
 
         ]],

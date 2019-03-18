@@ -37,20 +37,13 @@
                     <input class="easyui-passwordbox" name="password" data-options="required:true,iconCls:'icon-lock'">
                 </td>
             </tr>
-            <tr>
-                <td>验证码</td>
-                <td>
-                    <input class="easyui-textbox" name="valCode" data-options="required:true"><br>
-                    <img id="code" src="<%=request.getContextPath() %>/user/valCode.do" onclick="flushCode()">
-                </td>
-            </tr>
+
         </table>
     </form>
 </div>
 <!-- 按钮 -->
 <div id="button">
     <a href="javascript:login()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">登录</a>
-    <a href="javascript:quicklogin()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">快捷登录</a>
     <a href="javascript:toReg()" class="easyui-linkbutton" data-options="iconCls:'icon-redo'">注册</a>
 </div>
 </body>
@@ -66,7 +59,7 @@
             success:function(data){
                 $.messager.alert("提示",data,"info");
                 if(data=="登录成功"){
-                    location.href="<%=request.getContextPath() %>/login/toIndex";
+                    location.href="/login/toIndex";
                 }
             }
         })

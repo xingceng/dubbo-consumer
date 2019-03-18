@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
     <title>Title</title>
     <!-- 引入easyui样式文件 -->
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/jquery-easyui-1.5/themes/default/easyui.css">
@@ -29,6 +29,11 @@
 </head>
 <body>
 <!-- 定义新增表格 -->
+<div id="searchDivk">
+
+    <a href="javascript:openDig()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+
+</div>
 <div id="myDialog" class="easyui-dialog" style="width:500px;height:400px" data-options="modal:true,maximizable:true,resizable:true,buttons:'#myButton',closed:true,iconCls:'icon-save'">
     <form id="myForm" method="post">
         <table>
@@ -41,19 +46,19 @@
             <tr>
                 <td>房类型</td>
                 <td>
-                    <input type="radio" value="1">二手房
-                    <input type="radio" value="2">租房
-                    <input type="radio" value="3">公寓
-                    <input type="radio" value="4">新房
-                    <input type="radio" value="5">海外
+                    <input type="radio" value="1" name="housetype">二手房
+                    <input type="radio" value="2" name="housetype">租房
+                    <input type="radio" value="3" name="housetype">公寓
+                    <input type="radio" value="4" name="housetype">新房
+                    <input type="radio" value="5" name="housetype">海外
                 </td>
             <tr>
                 <td>价格</td>
                 <td>
-                    <select>
+                    <select name="housepriceid">
                         <option value="0" selected>请选择
                             <c:forEach items="${aa}" var="c">
-                        <option value="${c.priceid}"  >${c.peoplename}</option>
+                        <option value="${c.priceid}"  >${c.pricename}</option>
                         </c:forEach>
                     </select>
                 </td>
@@ -61,7 +66,7 @@
             <tr>
                 <td>面积</td>
                 <td>
-                    <select>
+                    <select name="houseacreageid">
                         <option value="0" selected>请选择
                             <c:forEach items="${bb}" var="c">
                         <option value="${c.acreageid}"  >${c.acreagename}</option>
@@ -72,7 +77,7 @@
             <tr>
                 <td>户型</td>
                 <td>
-                    <select>
+                    <select name="houseunitid">
                         <option value="0" selected>请选择
                             <c:forEach items="${cc}" var="c">
                         <option value="${c.unitid}"  >${c.unitname}</option>
@@ -83,9 +88,9 @@
             <tr>
                 <td>用途</td>
                 <td>
-                    <select>
+                    <select name="houseyongtuid">
                         <option value="0" selected>请选择
-                            <c:forEach items="${dd}" var="c">
+                            <c:forEach items="${oo}" var="c">
                         <option value="${c.yongtuid}"  >${c.yongtuname}</option>
                         </c:forEach>
                     </select>
@@ -95,10 +100,10 @@
             <tr>
                 <td>楼层</td>
                 <td>
-                    <select>
+                    <select name="houseloucengid">
                         <option value="0" selected>请选择
                             <c:forEach items="${ee}" var="c">
-                        <option value="${c.loucengid}"  >${c.loucengname}</option>
+                        <option value="${c.locengid}"  >${c.loucengname}</option>
                         </c:forEach>
                     </select>
                 </td>
@@ -107,7 +112,7 @@
             <tr>
                 <td>朝向</td>
                 <td>
-                    <select>
+                    <select name="housemianxiang">
                         <option value="0" selected>请选择
                             <c:forEach items="${ff}" var="c">
                         <option value="${c.mianxiangid}"  >${c.mianxiangname}</option>
@@ -120,7 +125,7 @@
             <tr>
                 <td>楼龄</td>
                 <td>
-                    <select>
+                    <select name="houseloulingid">
                         <option value="0" selected>请选择
                             <c:forEach items="${hh}" var="c">
                         <option value="${c.loulingid}"  >${c.loulingname}</option>
@@ -133,7 +138,7 @@
             <tr>
                 <td>装修</td>
                 <td>
-                    <select>
+                    <select name="housezhuangxiuid">
                         <option value="0" selected>请选择
                             <c:forEach items="${ii}" var="c">
                         <option value="${c.zhuangxiuid}"  >${c.zhuangxiuname}</option>
