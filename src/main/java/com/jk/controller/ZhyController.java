@@ -75,7 +75,13 @@ public class ZhyController {
     //新增房源
     @RequestMapping("addHouse")
 
-    public String  addHouse(House house , Model model){
+    public void  addHouse(House house){
+
+        zhyService.addHouse(house);
+    }
+
+    @RequestMapping("zhy")
+    public String zhy(Model model){
         List<Acreage> list = houseRwjService.queryAcreage();
         model.addAttribute("bb",list);
 
@@ -96,9 +102,9 @@ public class ZhyController {
 
         List<Mianxiang> list7 = houseRwjService.queryMianxiang();
         model.addAttribute("ff",list7);
-        zhyService.addHouse(house);
-        return  "House/ershoufang";
+        return  "House/addhouse";
     }
+
 
 
 
