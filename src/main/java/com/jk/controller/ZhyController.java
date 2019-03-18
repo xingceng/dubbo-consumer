@@ -25,42 +25,42 @@ public class ZhyController {
 
 
     //查询面积
-    @RequestMapping("queryAcreage")
+    @RequestMapping("queryAcreage1")
     public HashMap<String,Object> queryAcreage(Integer page, Integer rows){
         return zhyService.queryAcreage(page,rows);
     }
     //查询楼层
-    @RequestMapping("queryLouCeng")
+    @RequestMapping("queryLouCeng1")
     public HashMap<String,Object> queryLouCeng(Integer page, Integer rows){
         return zhyService.queryLouCeng(page,rows);
     }
     //查询楼龄
-    @RequestMapping("queryLouLing")
+    @RequestMapping("queryLouLing1")
     public HashMap<String,Object> queryLouLing(Integer page, Integer rows){
         return zhyService.queryLouLing(page,rows);
     }
     //查询价格
-    @RequestMapping("queryPrice")
+    @RequestMapping("queryPrice1")
     public HashMap<String,Object> queryPrice(Integer page, Integer rows){
         return zhyService.queryPrice(page,rows);
     }
     //查询用途
-    @RequestMapping("queryYongtu")
+    @RequestMapping("queryYongtu1")
     public HashMap<String,Object> queryYongtu(Integer page, Integer rows){
         return zhyService.queryYongtu(page,rows);
     }
     //查询装修
-    @RequestMapping("queryZhuangxiu")
+    @RequestMapping("queryZhuangxiu1")
     public HashMap<String,Object> queryZhuangxiu(Integer page, Integer rows){
         return zhyService  .queryZhuangxiu(page,rows);
     }
     //查询户型
-    @RequestMapping("queryHuxing")
+    @RequestMapping("queryHuxing1")
     public HashMap<String,Object> queryHuxing(Integer page, Integer rows){
         return zhyService .queryHuxing(page,rows);
     }
     //查询朝向
-    @RequestMapping("queryMianxiang")
+    @RequestMapping("queryMianxiang1")
     public HashMap<String,Object> queryMianxiang(Integer page, Integer rows){
         return zhyService .queryMianxiang(page,rows);
     }
