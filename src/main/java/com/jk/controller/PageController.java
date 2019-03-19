@@ -39,4 +39,19 @@ public class PageController {
     public String toHaiwai() {
         return "House/haiwai";
     }
+
+    @RequestMapping("/toUser")
+    public String toUser() {
+        return "User/user";
+    }
+
+    @RequestMapping("/toUpdatePwd")
+    public String toUpdatePwd() {
+        return "User/updatePwd";
+    }
+
+    @RequestMapping("/toLog")
+    public String toLog() {
+        return "Log/log";
+    }
 }
