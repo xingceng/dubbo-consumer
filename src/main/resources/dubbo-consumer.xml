@@ -19,4 +19,5 @@
     <dubbo:reference id="rwjService" interface="com.jk.service.HouseRwjService"/>
     <dubbo:reference id="HeService" interface="com.jk.service.HeService"/>
     <dubbo:reference id="lcbService" interface="com.jk.service.UserService"/>
+    <dubbo:reference id="zylService" interface="com.jk.service.ZylService"/>
 </beans>

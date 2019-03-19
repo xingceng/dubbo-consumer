@@ -3,7 +3,7 @@ package com.jk.model;
 
 import java.io.Serializable;
 
-public class role implements Serializable {
+public class Role implements Serializable {
     private static final long serialVersionUID = -6603882516814523496L;
 
     private Integer id;

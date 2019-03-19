@@ -57,7 +57,7 @@ public class LoginController {
         session.setAttribute("user", user2);
         return "登录成功";
     }
-
+    //查询权限树
     @RequestMapping("queryNavTree")
     @ResponseBody
     public List<Tree> queryNavTree(){

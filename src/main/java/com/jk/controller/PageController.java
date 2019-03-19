@@ -25,12 +25,6 @@ public class PageController {
         return "index";
     }
 
-    //页面查询合同
-    @RequestMapping("/toHeTong")
-    public String toHeTong() {
-        return "hetong/hetong";
-    }
-
     @RequestMapping("/ershoufang")
     public String toErshoufang() {
         return "House/ershoufang";
@@ -54,17 +48,6 @@ public class PageController {
     @RequestMapping("/haiwai")
     public String toHaiwai() {
         return "House/haiwai";
-    }
-
-    //页面查询任务
-    @RequestMapping("/toTask")
-    public String toTask(){
-        return "hetong/taskshow";
-    }
-
-    @RequestMapping("/toMyTask")
-    public String toMyTask(){
-        return "hetong/mytask";
     }
 
     @RequestMapping("/toUser")
@@ -117,5 +100,10 @@ public class PageController {
         m.addAttribute("brolist", brolist);
         return "lookhouse/lookhouse";
 
+    }
+
+    @RequestMapping("/toRolePower")
+    public String toRolePower() {
+        return "role/rolepower";
     }
 }
