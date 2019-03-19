@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -119,9 +121,34 @@ public class ZhyController {
         return  "House/addhouse";
     }
 
+    @RequestMapping("/querykehu")
+    @ResponseBody
+    public HashMap<String,Object> querykehu(Integer page, Integer rows){
+        return zhyService .querykehu(page,rows);
+    }
 
 
 
+   //新增客户
+    @RequestMapping("addkehu")
+    @ResponseBody
+    public void addkehu(Kehu kehu){
+        zhyService.addkehu(kehu);
+    }
+
+
+    @RequestMapping("delt")
+    @ResponseBody
+    public void delt(Integer kehuid){
+        zhyService.delt(kehuid);
+    }
+
+
+    @RequestMapping("queryAreaByPid")
+    @ResponseBody
+    public List<Circuit> queryAreaByPid(Integer pid){
+        return zhyService.queryAreaByPid(pid);
+    }
 
 
 

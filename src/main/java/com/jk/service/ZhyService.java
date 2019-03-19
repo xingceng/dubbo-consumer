@@ -1,8 +1,11 @@
 package com.jk.service;
 
+import com.jk.model.Circuit;
 import com.jk.model.House;
+import com.jk.model.Kehu;
 
 import java.util.HashMap;
+import java.util.List;
 
 public interface ZhyService {
 
@@ -27,4 +30,16 @@ public interface ZhyService {
 
     //新增房源
     void addHouse(House house);
+
+    //查询客户
+    HashMap<String,Object> querykehu(Integer page, Integer rows);
+
+    //新增客户
+    void addkehu(Kehu kehu);
+
+    //删除客户
+    void delt(Integer kehuid);
+
+    //地区
+    List<Circuit> queryAreaByPid(Integer pid);
 }
