@@ -25,6 +25,12 @@ public class PageController {
         return "index";
     }
 
+    //页面查询合同
+    @RequestMapping("/toHeTong")
+    public String toHeTong() {
+        return "hetong/hetong";
+    }
+
     @RequestMapping("/ershoufang")
     public String toErshoufang() {
         return "House/ershoufang";
