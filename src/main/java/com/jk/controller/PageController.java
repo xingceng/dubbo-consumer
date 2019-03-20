@@ -117,7 +117,7 @@ public class PageController {
     public String toBuyHouse(Model m){
         List<Knowledge> houselist = zylService.queryKnowledge();
         m.addAttribute("list", houselist);
-
+        return "buyhouse/buyhouse";
     }
     @RequestMapping("/tokehuList")
     public String tokehuList() {
@@ -128,7 +128,6 @@ public class PageController {
     @RequestMapping("/toTaskBack")
     public String toTaskBack(){
         return "hetong/taskback";
-        return "buyhouse/buyhouse";
     }
 
     @RequestMapping("/toRolePower")
