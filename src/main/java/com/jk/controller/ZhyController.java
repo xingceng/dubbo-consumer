@@ -146,7 +146,7 @@ public class ZhyController {
 
     @RequestMapping("queryAreaByPid")
     @ResponseBody
-    public List<Circuit> queryAreaByPid(Integer pid){
+    public List<Circuit> queryAreaByPid(int pid){
         return zhyService.queryAreaByPid(pid);
     }
 

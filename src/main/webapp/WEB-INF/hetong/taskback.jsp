@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: zhao先生
-  Date: 2019/3/19
-  Time: 9:28
+  Date: 2019/3/20
+  Time: 9:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>任务列表</title>
+    <title>任务反馈表</title>
     <!-- 引入easyui样式文件 -->
     <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/jquery-easyui-1.5/themes/default/easyui.css">
     <!-- 引入easyui图标样式文件 -->
@@ -22,37 +22,36 @@
 </head>
 <body>
 <div id="toolbar">
-    联系手机:<input class="easyui-textbox" id="phone">
+    任务id:<input class="easyui-textbox" id="taskid">
     <a href="javascript:searchUser()" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true">搜索</a>
 </div>
 <table id="myTable"></table>
 </body>
 <script>
     $(function(){
-        queryTask();
+        queryTaskBack();
     })
     //条查
     function searchUser(){
         $("#myTable").datagrid("load",{
-            phone:$("#phone").textbox("getValue"),
+            taskid:$("#taskid").textbox("getValue")
         });
     }
     //查询表格
-    function queryTask(){
+    function queryTaskBack(){
         $("#myTable").datagrid({
-            url:"queryTask",
-            title:"任务列表",
+            url:"queryTaskBack",
+            title:"任务反馈列表",
             fit:true,
             pagination:true,
             toolbar:"#toolbar",
             columns:[[
                 {field:"check",checkbox:true},
                 {field:"id",title:"id"},
-                {field:"phone",title:"手机号"},
-                {field:"email",title:"邮箱"},
-                {field:"content",title:"内容"},
-                {field:"hname",title:"房屋名称"},
+                {field:"taskid",title:"任务id"},
                 {field:"supportid",title:"客服id"},
+                {field:"feedback",title:"反馈结果"},
+                {field:"backtime",title:"反馈时间"},
                 {field:'tools',title:'操作',formatter:function(value,row,index){
                         return   "<a href='javascript:delTaskBack("+row.id+")'>删除</a>";
                     }}

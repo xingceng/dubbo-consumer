@@ -29,7 +29,7 @@
     <script src="<%=request.getContextPath() %>/js/kindeditor-4.1.10/kindeditor-all.js"></script>
 </head>
 <body>
-!-- 定义新增表格 -->
+<!-- 定义新增表格 -->
 <div id="searchDivk">
 
     <a href="javascript:openDig()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
@@ -77,7 +77,7 @@
             <tr>
                 <td>密码</td>
                 <td>
-                    <input class="easyui-passwordbox" name="kehuemail">
+                    <input class="easyui-passwordbox" name="kehupassword">
                 </td>
             </tr>
         </table>
@@ -158,7 +158,7 @@
                 //关闭
                 closeDig()
                 //刷新
-                $("MyTable").datagrid("load")
+                $("#MyTable").datagrid("load")
 
             }
 
@@ -212,14 +212,14 @@
         $.messager.confirm("提示","是否确认删除！",function(r){
             if(r){
                 $.ajax({
-                    url:"<%=request.getContextPath() %>delt",
+                    url:"<%=request.getContextPath() %>/delt",
                     type:"post",
                     data:{"kehuid":kehuid},
                     success:function(){
-                        //alert("删除成功");
+                        alert("删除成功");
                         $.messager.alert("提示消息","删除成功！","info");
                         //刷新页面
-                        search();
+                        $("#MyTable").datagrid("load")
                     },error:function(){
                         //alert("删除失败");
                         $.messager.alert("提示消息","删除失败！","error");

@@ -3,10 +3,7 @@ package com.jk.controller;
 import com.alibaba.dubbo.common.json.JSON;
 import com.alibaba.dubbo.common.json.JSONObject;
 import com.alibaba.dubbo.common.json.ParseException;
-import com.jk.model.HeTong;
-import com.jk.model.Task;
-import com.jk.model.Tree;
-import com.jk.model.User;
+import com.jk.model.*;
 import com.jk.service.LoginService;
 import com.jk.service.TaskService;
 import com.jk.utils.HttpClientUtil;
@@ -35,11 +32,7 @@ public class LoginController {
     @Autowired
     private TaskService taskService;
 
-    @RequestMapping("queryTask")
-    @ResponseBody
-    public HashMap<String,Object> queryTask(Integer page,Integer rows,Task task){
-        return taskService.queryTask(page,rows,task);
-    }
+
     //登陆
     @RequestMapping("login")
     @ResponseBody

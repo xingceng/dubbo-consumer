@@ -52,6 +52,17 @@ public class PageController {
         return "House/haiwai";
     }
 
+    //页面查询任务
+    @RequestMapping("/toTask")
+    public String toTask(){
+        return "hetong/taskshow";
+    }
+    //页面查询我的任务
+    @RequestMapping("/toMyTask")
+    public String toMyTask(){
+        return "hetong/mytask";
+    }
+
     @RequestMapping("/toUser")
     public String toUser() {
         return "User/user";
@@ -68,7 +79,6 @@ public class PageController {
 
     }
     //去到 网站用户申请看房 页面
-    //
     @RequestMapping("/toUserApply")
     public String toUserApply(Model m){
         List<House> houselist = zylService.queryHouse();
@@ -108,6 +118,16 @@ public class PageController {
         List<Knowledge> houselist = zylService.queryKnowledge();
         m.addAttribute("list", houselist);
 
+    }
+    @RequestMapping("/tokehuList")
+    public String tokehuList() {
+        return "House/kehuList";
+    }
+
+    //页面查询任务反馈结果
+    @RequestMapping("/toTaskBack")
+    public String toTaskBack(){
+        return "hetong/taskback";
         return "buyhouse/buyhouse";
     }
 

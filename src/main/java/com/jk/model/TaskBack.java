@@ -6,9 +6,28 @@ public class TaskBack implements Serializable {
     private static final long serialVersionUID = -3179773292089688732L;
     private Integer id;
     private Integer taskid;
-    private Integer brokerid;
+    private Integer supportid;
     private String feedback;
     private String backtime;
+
+    private String deadline;
+    private Integer select;
+
+    public Integer getSelect() {
+        return select;
+    }
+
+    public void setSelect(Integer select) {
+        this.select = select;
+    }
+
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
 
     public Integer getId() {
         return id;
@@ -26,12 +45,12 @@ public class TaskBack implements Serializable {
         this.taskid = taskid;
     }
 
-    public Integer getBrokerid() {
-        return brokerid;
+    public Integer getSupportid() {
+        return supportid;
     }
 
-    public void setBrokerid(Integer brokerid) {
-        this.brokerid = brokerid;
+    public void setSupportid(Integer supportid) {
+        this.supportid = supportid;
     }
 
     public String getFeedback() {

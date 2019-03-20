@@ -64,11 +64,29 @@
                         }else if(value==1){
                             return "失效";
                         }}},
-                    {field:"supportid",title:"客服id"},
+                    {field:"brokername",title:"经纪人"},
                     {field:"price",title:"价格"},
                     {field:"hname",title:"房屋名称"},
-                    {field:"deadline",title:"期限"}
+                    {field:"deadline",title:"期限",formatter:function(value,row,index){
+                        return value+"年";
+                        }},
+                    {field:'tools',title:'操作',formatter:function(value,row,index){
+                        return   "<a href='javascript:delheTong("+row.id+")'>删除</a>";
+                        }}
                 ]]
+            })
+        }
+        function delheTong(id){
+            $.ajax({
+                url:'/delheTong',
+                data:{id:id},
+                type:'post',
+                success:function(){
+                    $.messager.alert("提示","删除成功","info");
+                    searchUser();
+                },error:function(){
+                    $.messager.alert("提示","删除失败","info");
+                }
             })
         }
     </script>

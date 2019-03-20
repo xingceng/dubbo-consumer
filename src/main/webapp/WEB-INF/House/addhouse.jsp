@@ -46,8 +46,8 @@
             <tr>
                 <td>地址</td>
                 <td>
-                    省：<input class="easyui-combobox" name="province" id="province">
-                    市：<input class="easyui-combobox" name="city" id="city">
+                    市：<input class="easyui-combobox" name="housecircuitid" id="province">
+                    区：<input class="easyui-combobox" name="cityid" id="city">
                 </td>
             </tr>
 
@@ -219,7 +219,7 @@
                 //关闭
                 closeDig()
                 //刷新
-                $("MyTable").datagrid("load")
+                $("#MyTable").datagrid("load")
 
             }
 

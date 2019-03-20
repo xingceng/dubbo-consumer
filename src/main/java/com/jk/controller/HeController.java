@@ -26,4 +26,9 @@ public class HeController {
     public HashMap<String,Object> queryHeTong(Integer page, Integer rows, HeTong heTong){
         return heService.queryHeTong(page,rows,heTong);
     }
+
+    @RequestMapping("delheTong")
+    public void delheTong(Integer id){
+        heService.delheTong(id);
+    }
 }
