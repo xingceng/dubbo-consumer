@@ -1,7 +1,9 @@
 package com.jk.controller;
 
 import com.jk.model.Broker;
+import com.jk.model.BuyHouse;
 import com.jk.model.House;
+import com.jk.model.Knowledge;
 import com.jk.service.ZylService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -99,7 +101,14 @@ public class PageController {
         List<Broker> brolist = zylService.queryBroker();
         m.addAttribute("brolist", brolist);
         return "lookhouse/lookhouse";
+    }
+    //去到 买房知识  页面
+    @RequestMapping("/toBuyHouse")
+    public String toBuyHouse(Model m){
+        List<Knowledge> houselist = zylService.queryKnowledge();
+        m.addAttribute("list", houselist);
 
+        return "buyhouse/buyhouse";
     }
 
     @RequestMapping("/toRolePower")

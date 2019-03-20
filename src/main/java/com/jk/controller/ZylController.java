@@ -1,5 +1,6 @@
 package com.jk.controller;
 
+import com.jk.model.BuyHouse;
 import com.jk.model.LookHouse;
 import com.jk.model.UserApply;
 import com.jk.model.House;
@@ -82,6 +83,18 @@ public class ZylController {
     @ResponseBody
     public void deleteLookHouse(String ids){
         zylService.deleteLookHouse(ids);
+    }
+    //===============================================================================
+    //买房知识管理  查询
+    @RequestMapping("queryBuyHouse")
+    @ResponseBody
+    public HashMap<String,Object> queryBuyHouse(Integer rows, Integer page, BuyHouse b){
+        return zylService.queryBuyHouse(rows,page,b);
+    }
+    @RequestMapping("deleteBuyHouse")
+    @ResponseBody
+    public void deleteBuyHouse(String ids){
+        zylService.deleteBuyHouse(ids);
     }
 
 }

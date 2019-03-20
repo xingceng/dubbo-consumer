@@ -1,9 +1,6 @@
 package com.jk.service;
 
-import com.jk.model.Broker;
-import com.jk.model.House;
-import com.jk.model.LookHouse;
-import com.jk.model.UserApply;
+import com.jk.model.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +22,8 @@ public interface ZylService {
 
     List<Broker> queryBroker();
 
+    List<Knowledge> queryKnowledge();
+
     //申请看房  修改状态
     //改为 0 1 2
     void updateApplyStatus0(Integer id);
@@ -39,4 +38,9 @@ public interface ZylService {
     LookHouse queryLookHouseById(Integer id);
 
     void deleteLookHouse(String ids);
+
+    //==========================================================================================
+    HashMap<String, Object> queryBuyHouse(Integer rows, Integer page, BuyHouse b);
+
+    void deleteBuyHouse(String ids);
 }
