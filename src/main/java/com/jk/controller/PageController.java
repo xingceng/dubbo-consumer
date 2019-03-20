@@ -63,6 +63,12 @@ public class PageController {
         return "hetong/mytask";
     }
 
+    //页面查询合同
+    @RequestMapping("/toHeTong")
+    public String toHeTong(){
+        return "hetong/hetong";
+    }
+
     @RequestMapping("/toUser")
     public String toUser() {
         return "User/user";

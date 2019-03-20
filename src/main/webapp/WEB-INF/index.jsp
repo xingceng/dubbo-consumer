@@ -39,7 +39,7 @@
 <script>
     //加载导航树
     $("#navTree").tree({
-        url:"<%=request.getContextPath() %>/queryNavTree",
+        url:"<%=request.getContextPath() %>/queryNavTreeByUserId",
         parentField:"pid",
         onClick:function(node){
             if(node.url!=null && node.url!=''){

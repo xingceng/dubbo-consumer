@@ -50,6 +50,18 @@ public class LoginController {
         session.setAttribute("user", user2);
         return "登录成功";
     }
+
+    @RequestMapping("queryNavTreeByUserId")
+    @ResponseBody
+    public List<Tree> queryNavTreeByUserId(HttpSession session){
+        List<Tree> navTreeList =  new ArrayList<>();
+        User user = (User) session.getAttribute("user");
+            //查询用户对应的导航
+            navTreeList = loginService.queryNavTreeByUserId(user.getId());
+        return navTreeList;
+    }
+
+
     //查询权限树
     @RequestMapping("queryNavTree")
     @ResponseBody
