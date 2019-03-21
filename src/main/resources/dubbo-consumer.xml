@@ -14,7 +14,7 @@
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
     <!-- 声明需要订阅的服务接口 -->
     <dubbo:reference id="myService" interface="com.jk.service.LoginService"/>
-
+    <dubbo:reference id="broService" interface="com.jk.service.BroService"/>
     <dubbo:reference id="zhyService" interface="com.jk.service.ZhyService"/>
     <dubbo:reference id="rwjService" interface="com.jk.service.HouseRwjService"/>
 </beans>

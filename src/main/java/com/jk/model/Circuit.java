@@ -1,12 +1,14 @@
 package com.jk.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Circuit implements Serializable {
     private static final long serialVersionUID = 8961136574144853231L;
     private Integer circuitid;
     private String circuitname;
     private int pid;
+    private List<Circuit> children;
 
     public Integer getCircuitid() {
         return circuitid;
@@ -30,5 +32,13 @@ public class Circuit implements Serializable {
 
     public void setPid(int pid) {
         this.pid = pid;
+    }
+
+    public List<Circuit> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Circuit> children) {
+        this.children = children;
     }
 }
