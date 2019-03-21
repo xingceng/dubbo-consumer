@@ -39,4 +39,9 @@ public class PageController {
     public String toHaiwai() {
         return "House/haiwai";
     }
+
+    @RequestMapping("toBroker")
+    public String toBroker() {
+        return "broker/brolist";
+    }
 }

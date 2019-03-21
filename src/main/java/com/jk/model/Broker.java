@@ -94,7 +94,6 @@ public class Broker implements Serializable {
     public void setIphone(String iphone) {
         this.iphone = iphone;
     }
-
     public Integer getProvince() {
         return province;
     }
