@@ -5,6 +5,7 @@
  * Date:     2019/3/18 14:50
  * Description: 经纪人信息
  */
+
 package com.jk.model;
 
 import org.springframework.data.annotation.Transient;

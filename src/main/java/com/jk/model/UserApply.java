@@ -13,7 +13,25 @@ public class UserApply implements Serializable {
     private String applytime;
     private String looktime;
     private Integer brokerid;
-    private Integer ststus;
+    private Integer status;
+    private String broName;
+    private String housename;
+
+    public String getBroName() {
+        return broName;
+    }
+
+    public void setBroName(String broName) {
+        this.broName = broName;
+    }
+
+    public String getHousename() {
+        return housename;
+    }
+
+    public void setHousename(String housename) {
+        this.housename = housename;
+    }
 
     public Integer getId() {
         return id;
@@ -71,11 +89,11 @@ public class UserApply implements Serializable {
         this.brokerid = brokerid;
     }
 
-    public Integer getStstus() {
-        return ststus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setStstus(Integer ststus) {
-        this.ststus = ststus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

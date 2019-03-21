@@ -1,5 +1,7 @@
 package com.jk.model;
 
+import org.springframework.data.annotation.Transient;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,6 +31,39 @@ public class House implements Serializable {
     private String unitname;// 户型名
     private String yongtuname;//用途名
     private String zhuangxiuname;// 装修名
+
+    private Integer cityid;
+
+    public Integer getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(Integer cityid) {
+        this.cityid = cityid;
+    }
+
+
+    @Transient
+    private String  province;
+    @Transient
+    private String city;
+
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     private  String diqu;
 

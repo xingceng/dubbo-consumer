@@ -10,6 +10,14 @@ public class Circuit implements Serializable {
     private int pid;
     private List<Circuit> children;
 
+    public List<Circuit> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Circuit> children) {
+        this.children = children;
+    }
+
     public Integer getCircuitid() {
         return circuitid;
     }
@@ -32,13 +40,5 @@ public class Circuit implements Serializable {
 
     public void setPid(int pid) {
         this.pid = pid;
-    }
-
-    public List<Circuit> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<Circuit> children) {
-        this.children = children;
     }
 }

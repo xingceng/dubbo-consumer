@@ -11,6 +11,15 @@ public class BuyHouse implements Serializable {
     private String cover;
     private String dateout;
     private Integer click;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;

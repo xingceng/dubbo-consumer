@@ -12,6 +12,24 @@ public class LookHouse implements Serializable {
     private String feedback;
     private Integer commit;
     private Integer brokerid;
+    private String broName;
+    private String housename;
+
+    public String getHousename() {
+        return housename;
+    }
+
+    public void setHousename(String housename) {
+        this.housename = housename;
+    }
+
+    public String getBroName() {
+        return broName;
+    }
+
+    public void setBroName(String broName) {
+        this.broName = broName;
+    }
 
     public Integer getId() {
         return id;

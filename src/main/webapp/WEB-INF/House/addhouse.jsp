@@ -44,6 +44,14 @@
                 </td>
             </tr>
             <tr>
+                <td>地址</td>
+                <td>
+                    市：<input class="easyui-combobox" name="housecircuitid" id="province">
+                    区：<input class="easyui-combobox" name="cityid" id="city">
+                </td>
+            </tr>
+
+            <tr>
                 <td>房类型</td>
                 <td>
                     <input type="radio" value="1" name="housetype">二手房
@@ -159,6 +167,27 @@
 
 </body>
 <script>
+
+    //初始省
+    function initPro(){
+        $("#province").combobox({
+            url:"<%=request.getContextPath() %>/queryAreaByPid?pid=0",
+            valueField:"circuitid",
+            textField:"circuitname",
+            onChange:function(newValue,oldValue){
+                $("#city").combobox({
+                    url:"<%=request.getContextPath() %>/queryAreaByPid?pid="+newValue,
+                    valueField:"circuitid",
+                    textField:"circuitname"
+                })
+            }
+        })
+    }
+
+
+
+
+
     //打开对话框
     function openDig() {
         //重置表单
@@ -190,7 +219,7 @@
                 //关闭
                 closeDig()
                 //刷新
-                $("MyTable").datagrid("load")
+                $("#MyTable").datagrid("load")
 
             }
 
