@@ -1,9 +1,6 @@
 package com.jk.controller;
 
-import com.jk.model.Broker;
-import com.jk.model.BuyHouse;
-import com.jk.model.House;
-import com.jk.model.Knowledge;
+import com.jk.model.*;
 import com.jk.service.ZylService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,6 +59,11 @@ public class PageController {
     public String toMyTask(){
         return "hetong/mytask";
     }
+    //页面查询合同
+    @RequestMapping("/toHeTong")
+    public String toHeTong(){
+        return "hetong/hetong";
+    }
 
     @RequestMapping("/toUser")
     public String toUser() {
@@ -83,7 +85,7 @@ public class PageController {
     public String toUserApply(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<Broker> brolist = zylService.queryBroker();
+        List<User> brolist = zylService.queryUser();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply";
     }
@@ -91,7 +93,7 @@ public class PageController {
     public String toUserApply0(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<Broker> brolist = zylService.queryBroker();
+        List<User> brolist = zylService.queryUser();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply0";
     }
@@ -99,7 +101,7 @@ public class PageController {
     public String toUserApply1(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<Broker> brolist = zylService.queryBroker();
+        List<User> brolist = zylService.queryUser();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply1";
     }
@@ -108,9 +110,17 @@ public class PageController {
     public String toLookHouse(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<Broker> brolist = zylService.queryBroker();
+        List<User> brolist = zylService.queryUser();
         m.addAttribute("brolist", brolist);
         return "lookhouse/lookhouse";
+    }
+    @RequestMapping("/addhetong")
+    public String addhetong(Model m){
+        List<House> houselist = zylService.queryHouse();
+        m.addAttribute("houselist", houselist);
+        List<User> brolist = zylService.queryUser();
+        m.addAttribute("brolist", brolist);
+        return "hetong/addhetong";
     }
     //去到 买房知识  页面
     @RequestMapping("/toBuyHouse")

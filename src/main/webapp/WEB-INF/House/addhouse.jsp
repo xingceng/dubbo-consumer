@@ -34,13 +34,31 @@
     <a href="javascript:openDig()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
 
 </div>
-<div id="myDialog" class="easyui-dialog" style="width:500px;height:400px" data-options="modal:true,maximizable:true,resizable:true,buttons:'#myButton',closed:true,iconCls:'icon-save'">
+<div id="myDialog" class="easyui-dialog" style="width:700px;height:400px" data-options="modal:true,maximizable:true,resizable:true,buttons:'#myButton',closed:true,iconCls:'icon-save'">
     <form id="myForm" method="post">
         <table>
             <tr>
                 <td>房名</td>
                 <td>
                     <input class="easyui-textbox" name="housename">
+                </td>
+            </tr>
+            <tr>
+                <td>房子图片</td>
+                <td>
+                <input name="houseimg" id="hideImg" type="hidden">
+                <input id="uploadify" type="file">
+                <div id="fileQueue"></div>
+                <img id="testimg" width="66">
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>房子详情</td>
+                <td>
+
+                    <textarea name="housexiangqing"></textarea>
                 </td>
             </tr>
             <tr>
@@ -168,6 +186,10 @@
 </body>
 <script>
 
+    $(function(){
+        preFile();
+
+    })
     //初始省
     function initPro(){
         $("#province").combobox({
@@ -192,6 +214,7 @@
     function openDig() {
         //重置表单
         $("#myForm").form("reset");
+        initPro();
 
         //打开
         $("#myDialog").dialog({
@@ -208,23 +231,73 @@
     }
 
 
-    //新增
-    function add(){
-        $("#myForm").form("submit",{
-            url:"<%=request.getContextPath() %>/addHouse",
-            success:function(){
-                $.messager.alert("提示","保存成功","info")
+    function add() {
+        var form = new FormData($("#myForm")[0]);
+        $.ajax({
+            url: "<%=request.getContextPath() %>/addHouse",
+            type: "post",
+            data: form,
+            processData: false,
+            contentType: false,
+            success: function () {
+                $.messager.alert("提示", "保存成功", "info")
                 //关闭弹框
                 $("#myDialog").dialog("close")
                 //关闭
                 closeDig()
                 //刷新
                 $("#MyTable").datagrid("load")
+            },
+            error: function () {
+
 
             }
 
         })
+    }
 
+
+
+    //图片控件
+    function preFile() {
+//上传插件
+        $("#uploadify").uploadify({
+            //插件自带  不可忽略的参数
+            'swf': '<%=request.getContextPath() %>/js/uploadify/uploadify.swf',
+            //前台请求后台的url 不可忽略的参数                //*****要修改路经 !!!!!!!!!
+            'uploader': '<%=request.getContextPath() %>/upload',
+            //给div的进度条加背景 不可忽略
+            'queueID': 'fileQueue',
+            //上传文件文件名 !!!!!!!与后台接口参数名字需要完全一致!!!!!!!!
+            'fileObjName': 'file',
+            //给上传按钮设置文字
+            'buttonText': '上传图片',
+            //设置文件是否自动上传
+            'auto': true,
+            //可以同时选择多个文件 默认为true  不可忽略
+            'multi': false,
+            //上传后队列是否消失
+            'removeCompleted': true,
+            //队列消失时间
+            'removeTimeout': 1,
+            //上传文件的个数，项目中一共可以上传文件的个数
+            'uploadLimit': -1,
+            'onFallback': function () {
+                alert("浏览器不支持,请更换其他浏览器,或打开Flash插件");
+            },
+            //上传失败
+            'onUploadError': function () {
+                alert("上传失败");
+            },
+            //成功回调函数 file：文件对象。data后台输出数据
+            'onUploadSuccess': function (file, data, response) {
+                console.log(data);
+                //给img框赋值进行展示
+                $("#testimg").attr("src", data);
+                //给隐藏的文本框赋值 传到后台
+                $('#hideImg').val(data);
+            }
+        })
     }
 
 </script>

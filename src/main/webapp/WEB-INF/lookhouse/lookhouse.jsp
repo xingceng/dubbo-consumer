@@ -29,7 +29,6 @@
 
     <a href="javascript:searchUSer()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
     <br>
-    <a href="javascript:openDig()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
 </div>
 <!-- 定义表格 -->
 <table id="myTable">
@@ -68,7 +67,7 @@
                     <select name="brokerid">
                         <option value="-1" selected>请选择
                             <c:forEach items="${brolist}" var="h">
-                        <option value="${h.id }" ${h.id ==book.houseid?"selected":"" }>${h.broName}</option>
+                        <option value="${h.id }" ${h.id ==book.houseid?"selected":"" }>${h.username}</option>
                         </c:forEach>
                     </select>
                 </td>
@@ -165,7 +164,7 @@
                             return "否";
                         }
                 }},
-                {field:'broName',title:'经纪人'},
+                {field:'username',title:'经纪人'},
                 {field:'tools',title:'操作',width:100,align:'center',formatter:function(value,row,index){
                         var str = "<a href='javascript:deleteUser("+row.id+")'>删除</a>";
                         str+=" | <a href='javascript:openUser("+row.id+")'>修改</a>";

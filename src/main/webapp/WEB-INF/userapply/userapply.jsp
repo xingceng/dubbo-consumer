@@ -80,10 +80,10 @@
 </div>
 <div id="myDialog1" class="easyui-dialog" style="width:800px;height:500px" data-options="modal:true,collapsible:true,minimizable:true,maximizable:true,resizable:true,buttons:'#myButton1',closed:true,iconCls:'icon-save'">
     <input style="display:none" name="id" id="shengid">
-    <select name="bid" id="brid">
+    <select name="brokerid">
         <option value="-1" selected>请选择
             <c:forEach items="${brolist}" var="h">
-        <option value="${h.id }" ${h.id ==book.houseid?"selected":"" }>${h.broName}</option>
+        <option value="${h.id}">${h.username}</option>
         </c:forEach>
     </select>
 </div>
@@ -188,7 +188,7 @@
                 {field:'housename',title:'房源'},
                 {field:'applytime',title:'申请时间'},
                 {field:'looktime',title:'看房时间'},
-                {field:'broName',title:'经纪人',formatter:function(value,row,index){
+                {field:'username',title:'经纪人',formatter:function(value,row,index){
                         if(value==null){
                             var str="<a href='javascript:openBro("+row.id+")'>分配</a>"
                             return str;

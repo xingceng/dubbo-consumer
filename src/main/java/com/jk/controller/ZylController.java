@@ -1,15 +1,14 @@
 package com.jk.controller;
 
-import com.jk.model.BuyHouse;
-import com.jk.model.LookHouse;
-import com.jk.model.UserApply;
-import com.jk.model.House;
+import com.jk.model.*;
 import com.jk.service.ZylService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 
@@ -97,4 +96,17 @@ public class ZylController {
         zylService.deleteBuyHouse(ids);
     }
 
+    @RequestMapping("updateUser")
+    @ResponseBody
+    public void updateUser(Integer id){
+        zylService.updateUser(id);
+    }
+
+    @RequestMapping("queryHousebyRoleid")
+    @ResponseBody
+    public List<House> queryHouse(HttpSession httpSession){
+        User user = (User) httpSession.getAttribute("user");
+        Integer id = user.getId();
+        return zylService.queryUserApplyHouse(id);
+    }
 }
