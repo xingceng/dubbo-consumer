@@ -16,4 +16,6 @@ public interface LoginService {
     List<Tree> queryNavTree();
 
     int random();
+
+    List<Tree> queryNavTreeByUserId(Integer id);
 }

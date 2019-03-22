@@ -59,17 +59,20 @@ public class PageController {
     public String toMyTask(){
         return "hetong/mytask";
     }
-    //页面查询合同
-    @RequestMapping("/toHeTong")
-    public String toHeTong(){
-        return "hetong/hetong";
-    }
 
     @RequestMapping("/toUser")
     public String toUser() {
         return "User/user";
     }
-
+    @RequestMapping("toBroker")
+    public String toBroker() {
+        return "broker/brolist";
+    }
+    //页面查询合同
+    @RequestMapping("/toHeTong")
+    public String toHeTong(){
+        return "hetong/hetong";
+    }
     @RequestMapping("/toUpdatePwd")
     public String toUpdatePwd() {
         return "User/updatePwd";
@@ -85,7 +88,7 @@ public class PageController {
     public String toUserApply(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<User> brolist = zylService.queryUser();
+        List<Broker> brolist = zylService.queryBroker();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply";
     }
@@ -93,7 +96,7 @@ public class PageController {
     public String toUserApply0(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<User> brolist = zylService.queryUser();
+        List<Broker> brolist = zylService.queryBroker();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply0";
     }
@@ -101,7 +104,7 @@ public class PageController {
     public String toUserApply1(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<User> brolist = zylService.queryUser();
+        List<Broker> brolist = zylService.queryBroker();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply1";
     }
@@ -110,17 +113,9 @@ public class PageController {
     public String toLookHouse(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<User> brolist = zylService.queryUser();
+        List<Broker> brolist = zylService.queryBroker();
         m.addAttribute("brolist", brolist);
         return "lookhouse/lookhouse";
-    }
-    @RequestMapping("/addhetong")
-    public String addhetong(Model m){
-        List<House> houselist = zylService.queryHouse();
-        m.addAttribute("houselist", houselist);
-        List<User> brolist = zylService.queryUser();
-        m.addAttribute("brolist", brolist);
-        return "hetong/addhetong";
     }
     //去到 买房知识  页面
     @RequestMapping("/toBuyHouse")
@@ -143,5 +138,13 @@ public class PageController {
     @RequestMapping("/toRolePower")
     public String toRolePower() {
         return "role/rolepower";
+    }
+    @RequestMapping("/addhetong")
+    public String addhetong(Model m){
+        List<House> houselist = zylService.queryHouse();
+        m.addAttribute("houselist", houselist);
+        List<User> brolist = zylService.queryUser();
+        m.addAttribute("brolist", brolist);
+        return "hetong/addhetong";
     }
 }
