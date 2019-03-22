@@ -139,29 +139,7 @@
             }
         })
     }
-    //修改经纪人
-    function updateBro(){
-        var options=$("#brid option:selected");
-        var brid=options.val();
-        var id=$("#shengid").val();
 
-        $.ajax({
-            url:'updateBro',
-            data:{"id":id,"brid":brid},
-            type:"post",
-            success:function(){
-                $.messager.alert("提示消息","分配成功！","info");
-                //关闭弹框
-                $("#myDialog1").dialog('close');
-                //刷新页面
-                searchUSer();
-            },
-            error:function(){
-                $.messager.alert("提示消息","分配失败！","info");
-
-            }
-        })
-    }
     //打开新增对话框
     function openDig(){
         //重置表单

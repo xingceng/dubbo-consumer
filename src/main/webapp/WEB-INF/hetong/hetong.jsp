@@ -75,7 +75,7 @@
         }
         function delheTong(id){
             $.ajax({
-                url:'/delheTong',
+                url:'delheTong',
                 data:{id:id},
                 type:'post',
                 success:function(){

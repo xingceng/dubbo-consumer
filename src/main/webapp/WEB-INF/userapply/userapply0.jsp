@@ -36,7 +36,7 @@
 </table>
 <div id="myDialog1" class="easyui-dialog" style="width:800px;height:500px" data-options="modal:true,collapsible:true,minimizable:true,maximizable:true,resizable:true,buttons:'#myButton1',closed:true,iconCls:'icon-save'">
     <input style="display:none" name="id" id="shengid">
-    <select name="brokerid">
+    <select name="brokerid" id="brid">
         <option value="-1" selected>请选择
             <c:forEach items="${brolist}" var="h">
         <option value="${h.id}">${h.username}</option>
@@ -130,12 +130,10 @@
                 //关闭弹框
                 $("#myDialog").dialog('close');
                 //刷新页面
-                searchUSer();
+                $("#myTable").datagrid({});
             }
         })
     }
-
-
 
     //条件查询
     function searchUSer(){
@@ -169,7 +167,7 @@
                         }
                     }},
                 {field:'tools',title:'操作',width:100,align:'center',formatter:function(value,row,index){
-                        var str = "<a href='javascript:updateUser("+row.id+")'>看房反馈</a>";
+                        var str = "<a href='javascript:updateUser("+row.id+",\""+row.username+"\")'>看房反馈</a>";
                         return str;
                     }}
             ]],
@@ -190,23 +188,50 @@
             closed:false   //true 关闭 false 打开
         })
     }
-    function updateUser(id){
-        //重置表单
-        $("#myForm").form("reset");
+    //修改经纪人
+    function updateBro(){
+        var options=$("#brid option:selected");
+        var brid=options.val();
+        var id=$("#shengid").val();
 
-        $("#myDialog").dialog({
-            title:'看房反馈',
-            closed:false   //true 关闭 false 打开
-        })
         $.ajax({
-            url:"updateUser",
-            data:{id:id},
+            url:'updateBro',
+            data:{"id":id,"brid":brid},
             type:"post",
             success:function(){
+                $.messager.alert("提示消息","分配成功！","info");
+                //关闭弹框
+                $("#myDialog1").dialog('close');
+                //刷新页面
+                searchUSer();
+            },
+            error:function(){
+                $.messager.alert("提示消息","分配失败！","info");
 
             }
-
         })
+    }
+    function updateUser(id,username){
+        if(username==null){
+            $.messager.alert("警告","请先分配经纪人","info");
+            return;
+        }else{
+            //重置表单
+            $("#myForm").form("reset");
+
+            $("#myDialog").dialog({
+                title:'看房反馈',
+                closed:false   //true 关闭 false 打开
+            })
+            $.ajax({
+                url:"updateUser",
+                data:{id:id},
+                type:"post",
+                success:function(){
+
+                }
+            })
+        }
     }
 </script>
 </html>

@@ -88,7 +88,7 @@ public class PageController {
     public String toUserApply(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<Broker> brolist = zylService.queryBroker();
+        List<User> brolist = zylService.queryUser();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply";
     }
@@ -96,7 +96,7 @@ public class PageController {
     public String toUserApply0(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<Broker> brolist = zylService.queryBroker();
+        List<User> brolist = zylService.queryUser();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply0";
     }
@@ -104,7 +104,7 @@ public class PageController {
     public String toUserApply1(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<Broker> brolist = zylService.queryBroker();
+        List<User> brolist = zylService.queryUser();
         m.addAttribute("brolist", brolist);
         return "userapply/userapply1";
     }
@@ -113,7 +113,7 @@ public class PageController {
     public String toLookHouse(Model m){
         List<House> houselist = zylService.queryHouse();
         m.addAttribute("houselist", houselist);
-        List<Broker> brolist = zylService.queryBroker();
+        List<User> brolist = zylService.queryUser();
         m.addAttribute("brolist", brolist);
         return "lookhouse/lookhouse";
     }
