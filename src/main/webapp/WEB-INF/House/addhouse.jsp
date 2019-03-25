@@ -260,7 +260,7 @@
 
     //图片控件
     function preFile() {
-//上传插件
+    //上传插件
         $("#uploadify").uploadify({
             //插件自带  不可忽略的参数
             'swf': '<%=request.getContextPath() %>/js/uploadify/uploadify.swf',

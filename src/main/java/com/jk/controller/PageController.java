@@ -119,9 +119,7 @@ public class PageController {
     }
     //去到 买房知识  页面
     @RequestMapping("/toBuyHouse")
-    public String toBuyHouse(Model m){
-        List<Knowledge> houselist = zylService.queryKnowledge();
-        m.addAttribute("list", houselist);
+    public String toBuyHouse(){
         return "buyhouse/buyhouse";
     }
     @RequestMapping("/tokehuList")
