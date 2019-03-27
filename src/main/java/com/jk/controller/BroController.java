@@ -7,8 +7,7 @@
  */
 package com.jk.controller;
 
-import com.jk.model.Broker;
-import com.jk.model.Circuit;
+import com.jk.model.*;
 import com.jk.service.BroService;
 import com.jk.utils.OssUpFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +62,43 @@ public class BroController {
     @RequestMapping("queryCir")
     public List<Circuit> queryCirByPid(int pid){
         return broService.queryCirByPid(pid);
+    }
+
+    @RequestMapping("queryStore")
+    public List<Store> queryStore(Integer cityid){
+        return broService.queryStore(cityid);
+    }
+
+    /**
+     * @Author 杨明瑞
+     * @Description //TODO 查询小区
+     * @Date 10:19 2019/3/22
+     * @Param [housecircuitid]
+     * @return java.util.List<com.jk.model.House>
+     **/
+    @RequestMapping("queryHose")
+    public List<House> queryHouse(Integer housecircuitid){
+        return broService.queryHouse(housecircuitid);
+    }
+
+    /**
+     * @Author 杨明瑞
+     * @Description //TODO 查询经纪人列表
+     * @Date 15:21 2019/3/18
+     * @Param [page, rows]
+     * @return java.util.HashMap<java.lang.String,java.lang.Object>
+     **/
+    @RequestMapping("queryMyBro")
+    public HashMap<String,Object> queryMyBro(int page, int rows, HttpSession session){
+        User user2 = (User) session.getAttribute("user");
+        Integer userid = user2.getId();
+        return broService.queryMyBro(page,rows,userid);
+    }
+
+    @RequestMapping("queryBroInfo")
+    public List<Broker> queryBroInfo(HttpSession session){
+        Integer id = (Integer) session.getAttribute("id");
+        return broService.queryBroInfo(id);
     }
 
     //OOS图片上传

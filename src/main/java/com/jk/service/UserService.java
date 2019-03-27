@@ -23,4 +23,6 @@ public interface UserService {
     List<PowerMenu> queryPowerMenuList(Integer powerId);
 
     void savePowerMenu(PowerMenu menu);
+
+    void guanZhu(Integer houseid, Integer userid);
 }

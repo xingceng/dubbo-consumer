@@ -41,10 +41,10 @@
                 <tr>
                     <td>头像</td>
                     <td>
-                        <textarea name="broCover" class="form-control"></textarea>
+                        <textarea name="broCover" class="form-control" style="display: none"></textarea>
                         <img id="testimg" width="50"> <!-- 上传完显示的图片  -->
                         <div id="fileQueue"></div><!--文件上传的进度条  -->
-                        <input id="uploadify" name="headimg" type="file" >
+                        <input id="uploadify" name="headimg" type="file">
                     </td>
                 </tr>
                 <tr>
@@ -60,10 +60,40 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>工作年限</td>
+                    <td>
+                        <select>
+                            <option value="">请选择工作年限</option>
+                            <option value="1">1年</option>
+                            <option value="2">2年</option>
+                            <option value="3">3年</option>
+                            <option value="4">4年</option>
+                            <option value="5">5年</option>
+                            <option value="6">6年</option>
+                            <option value="7">7年</option>
+                            <option value="8">8年</option>
+                            <option value="9">9年</option>
+                            <option value="10">10年</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td>服务区域</td>
                     <td>
                         市：<input class="easyui-combobox" name="province" id="province">
                         区：<input class="easyui-combobox" name="city" id="city">
+                    </td>
+                </tr>
+                <tr>
+                    <td>所属店铺</td>
+                    <td>
+                        <input class="easyui-combobox" name="broStore" id="broStore">
+                    </td>
+                </tr>
+                <tr>
+                    <td>主营小区</td>
+                    <td>
+                        <input class="easyui-combobox" name="mainplot" id="mainplot">
                     </td>
                 </tr>
             </table>
@@ -103,11 +133,11 @@
                 valueField:"circuitid",
                 textField:"circuitname",
                 onChange:function(newValue,oldValue){
-                    $("#city1").combobox({
-                        url:"<%=request.getContextPath() %>/queryCir?pid="+newValue,
-                        valueField:"circuitid",
-                        textField:"circuitname"
-                    })
+                        $("#city1").combobox({
+                            url:"<%=request.getContextPath() %>/queryCir?pid="+newValue,
+                            valueField:"circuitid",
+                            textField:"circuitname"
+                        })
                 }
             })
         }
@@ -122,7 +152,22 @@
                     $("#city").combobox({
                         url:"<%=request.getContextPath() %>/queryCir?pid="+newValue,
                         valueField:"circuitid",
-                        textField:"circuitname"
+                        textField:"circuitname",
+                        onChange:function(newValue,oldValue) {
+                            $("#broStore").combobox({
+                                url: "<%=request.getContextPath() %>/queryStore?cityid=" + newValue,
+                                valueField: "id",
+                                textField: "storename",
+                                onChange:function(newValue,oldValue) {
+                                    $("#mainplot").combobox({
+                                        url: "<%=request.getContextPath() %>/queryHose?housecircuitid=" + newValue,
+                                        valueField: "houseid",
+                                        textField: "housename",
+                                        multiple: true
+                                    })
+                                }
+                            })
+                        }
                     })
                 }
             })
@@ -145,16 +190,28 @@
                     {field: 'broCover', title: '头像', width: 100, align: 'center',formatter:function(value,row,index){
                             return "<img width='50px' height='50px' src='"+value+"'>";
                         }},
-                    {field: 'broName', title: '姓名', width: 100, align: 'center'},
+                    {field: 'broName', title: '姓名', width: 100, align: 'center',formatter:function(value,row,index) {
+                        return "<a href='javascript:toInfo(" + row.id + ")'>'"+row.broName+"'</a>";
+                    }},
                     {field: 'iphone', title: '手机号', width: 100, align: 'center'},
-                    {field: 'workYear', title: '工作年限', width: 100, align: 'center'},
-                    {field: 'coverage', title: '服务区域', width: 100, align: 'center'},
+                    {field: 'coverage', title: '服务区域', width: 180, align: 'center'},
                     {field: 'zuping', title: '租凭次数', width: 100, align: 'center'},
                     {field: 'daikan', title: '带看次数', width: 100, align: 'center'},
-                    {field: 'follCount', title: '关注人数', width: 100, align: 'center'},
+                    {field: 'follCount', title: '关注人数', width: 100, align: 'center'}
                 ]]
             })
         }
+
+        function toInfo(id) {
+            $.ajax({
+                url:"<%=request.getContextPath() %>/toBroInfo",
+                type:"post",
+                data:{"id":id},
+                success:function () {
+                }
+            })
+        }
+
         //保存用户数据
         function saveBro(){
             $("#myFrom").form("submit",{

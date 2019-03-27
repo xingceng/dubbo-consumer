@@ -34,8 +34,6 @@
 <!--定义表格 -->
 <table id="MyTable"></table>
 
-
-
 </body>
 <script>
 
@@ -63,7 +61,9 @@
                     return "已出租"
                 }
             }},
-
+            {field:"tools",title:"操作",formatter:function(value,row,index){
+                    return "<a href='javascript:guanZhu("+row.houseid+")'>关注</a>";
+                }}
 
         ]],
         pagination:true,//开启分页
@@ -75,7 +75,17 @@
         pagePosition:"top"
     })
 
-
+    //关注房源
+    function guanZhu(houseid){
+        $.ajax({
+            url:"<%=request.getContextPath()%>/guanZhu",
+            type:"post",
+            data:{"houseid":houseid},
+            success:function () {
+                $.messager.alert("提示","关注成功！","info");
+            }
+        })
+    }
 
 </script>
 </html>

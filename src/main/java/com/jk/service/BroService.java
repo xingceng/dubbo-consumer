@@ -9,6 +9,8 @@ package com.jk.service;
 
 import com.jk.model.Broker;
 import com.jk.model.Circuit;
+import com.jk.model.House;
+import com.jk.model.Store;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -51,4 +53,19 @@ public interface BroService {
      * @return java.lang.String
      **/
     String updateHead(MultipartFile file, Integer id);
+
+    /**
+     * @Author 杨明瑞
+     * @Description //TODO 查询小区
+     * @Date 10:09 2019/3/22
+     * @Param [housecircuitid]
+     * @return java.util.List<com.jk.model.House>
+     **/
+    List<House> queryHouse(Integer housecircuitid);
+
+    HashMap<String, Object> queryMyBro(int page, int rows, Integer userid);
+
+    List<Store> queryStore(Integer cityid);
+
+    List<Broker> queryBroInfo(Integer id);
 }

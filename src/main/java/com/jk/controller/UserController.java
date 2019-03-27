@@ -66,4 +66,13 @@ public class UserController {
     public void savePowerMenu(PowerMenu menu){
         userService.savePowerMenu(menu);
     }
+
+    //关注房源
+    @RequestMapping("guanZhu")
+    @ResponseBody
+    public void guanZhu(Integer houseid,HttpSession session){
+        User user2 = (User) session.getAttribute("user");
+        Integer userid = user2.getId();
+        userService.guanZhu(houseid,userid);
+    }
 }

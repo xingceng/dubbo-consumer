@@ -232,6 +232,4 @@ public class LoginController {
         //返回创建好的邮件
         return message;
     }
-
-
 }
