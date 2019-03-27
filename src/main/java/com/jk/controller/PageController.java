@@ -1,8 +1,14 @@
 package com.jk.controller;
 
+import com.jk.model.House;
+import com.jk.model.User;
+import com.jk.service.ZylService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
