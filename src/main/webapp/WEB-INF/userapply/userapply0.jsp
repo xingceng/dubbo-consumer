@@ -29,20 +29,34 @@
 
     <a href="javascript:searchUSer()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
     <br>
-    <a href="javascript:openDig()" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true">新增</a>
+
 </div>
 <!-- 定义表格 -->
 <table id="myTable">
 </table>
+<div id="myDialog1" class="easyui-dialog" style="width:800px;height:500px" data-options="modal:true,collapsible:true,minimizable:true,maximizable:true,resizable:true,buttons:'#myButton1',closed:true,iconCls:'icon-save'">
+    <input style="display:none" name="id" id="shengid">
+    <select name="brokerid" id="brid">
+        <option value="-1" selected>请选择
+            <c:forEach items="${brolist}" var="h">
+        <option value="${h.id}">${h.username}</option>
+        </c:forEach>
+    </select>
+</div>
+<!-- 定义按钮 -->
+<div id="myButton1">
+    <a href="javascript:updateBro()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">保存</a>
+    <a href="javascript:closeDig1()" class="easyui-linkbutton"  data-options="iconCls:'icon-cancel'">关闭</a>
+</div>
 <!-- 定义弹框、对话框 -->
 <div id="myDialog" class="easyui-dialog" style="width:800px;height:500px" data-options="modal:true,collapsible:true,minimizable:true,maximizable:true,resizable:true,buttons:'#myButton',closed:true,iconCls:'icon-save'">
     <form id="myForm" method="post">
         <input style="display:none" name="id">
         <table>
             <tr>
-                <td>用户名</td>
+                <td>看房时间</td>
                 <td>
-                    <input class="easyui-textbox" name="name">
+                    <input class="easyui-datebox" name="looktime">
                 </td>
             </tr>
             <tr>
@@ -63,80 +77,115 @@
                 </td>
             </tr>
             <tr>
-                <td>申请时间</td>
+                <td>经纪人</td>
                 <td>
-                    <input class="easyui-datebox" name="applytime">
+                    <select name="brokerid">
+                        <option value="-1" selected>请选择
+                            <c:forEach items="${brolist}" var="h">
+                        <option value="${h.id }" ${h.id ==book.houseid?"selected":"" }>${h.username}</option>
+                        </c:forEach>
+                    </select>
                 </td>
             </tr>
             <tr>
-                <td>看房时间</td>
+                <td>是否确认</td>
                 <td>
-                    <input class="easyui-datebox" name="looktime">
+                    <input type="radio" name="commit" value="0">否
+                    <input type="radio" name="commit" value="1">是
+                </td>
+            </tr>
+            <tr>
+                <td>反馈</td>
+                <td>
+                    <input class="easyui-textbox" name="feedback">
                 </td>
             </tr>
 
         </table>
     </form>
 </div>
-<div id="myDialog1" class="easyui-dialog" style="width:800px;height:500px" data-options="modal:true,collapsible:true,minimizable:true,maximizable:true,resizable:true,buttons:'#myButton1',closed:true,iconCls:'icon-save'">
-    <input style="display:none" name="id" id="shengid">
-    <select name="bid" id="brid">
-        <option value="-1" selected>请选择
-            <c:forEach items="${brolist}" var="h">
-        <option value="${h.id }" ${h.id ==book.houseid?"selected":"" }>${h.broName}</option>
-        </c:forEach>
-    </select>
-</div>
 <!-- 定义按钮 -->
 <div id="myButton">
-    <a href="javascript:addUser()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">保存</a>
+    <a href="javascript:addBack()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">保存</a>
     <a href="javascript:closeDig()" class="easyui-linkbutton"  data-options="iconCls:'icon-cancel'">关闭</a>
-</div>
-<!-- 定义按钮 -->
-<div id="myButton1">
-    <a href="javascript:updateBro()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'">保存</a>
-    <a href="javascript:closeDig1()" class="easyui-linkbutton"  data-options="iconCls:'icon-cancel'">关闭</a>
 </div>
 </body>
 <script>
 
-    //修改回显
-    function openUser(id){
-        $.ajax({
-            url:"queryUserApplyById",
-            type:"post",
-            data:{id:id},
-            success:function(data){
-                //数据回显
-                $("#myForm").form("load",data);//重新加载表单
-                //打开对话框
-                $("#myDialog").dialog({
-                    title:'修改用户',
-                    closed:false
-                })
-            }
-        })
-    }
 
-    //关闭按钮
-    function closeDig(){
-        $("#myDialog").dialog('close');
-    }
     //关闭按钮1
     function closeDig1(){
         $("#myDialog1").dialog('close');
     }
+    //关闭按钮1
+    function closeDig(){
+        $("#myDialog").dialog('close');
+    }
     //新增、修改用户
-    function addUser(){
+    function addBack(){
         $("#myForm").form("submit",{
-            url:"addUserApply",
+            url:"addLookHouse",
             success:function(){
                 $.messager.alert("提示","保存成功！","info");
                 //关闭弹框
                 $("#myDialog").dialog('close');
                 //刷新页面
-                searchUSer();
+                $("#myTable").datagrid({});
             }
+        })
+    }
+
+    //条件查询
+    function searchUSer(){
+        $("#myTable").datagrid("load",{
+            name:$("#name").textbox("getValue"),
+        })
+    }
+    $("#myTable").datagrid({
+        url:"queryUserApply0",
+        columns:
+            [[{field:'check',checkbox:true},
+                {field:'id',title:'编号'},
+                {field:'name',title:'申请人'},
+                {field:'phone',title:'手机号'},
+                {field:'housename',title:'房源'},
+                {field:'applytime',title:'申请时间'},
+                {field:'looktime',title:'看房时间'},
+                {field:'username',title:'经纪人',formatter:function(value,row,index){
+                        if(value==null){
+                            var str="<a href='javascript:openBro("+row.id+")'>分配</a>"
+                            return str;
+                        }else{
+                            return value;
+                        }
+                    }},
+                {field:'status',title:'状态',formatter:function (value,row,index) {
+                        if(value==1){
+                            return "已处理";
+                        }else if(value==0){
+                            return "未处理";
+                        }
+                    }},
+                {field:'tools',title:'操作',width:100,align:'center',formatter:function(value,row,index){
+                        var str = "<a href='javascript:updateUser("+row.id+",\""+row.username+"\")'>看房反馈</a>";
+                        return str;
+                    }}
+            ]],
+        pagination:true,//开启分页
+        pageList:[4,5,6], //初始化页面大小选择列表
+        pageSize:4 , //初始化每页显示条数，默认是10
+        pageNumber:1, //当前页,默认是1
+        fit:true,
+        loadMsg:"正在努力加载中。。。", //请求后台的提示信息
+        toolbar: "#searchDiv"     //添加工具栏 ： div的id
+
+    })
+    function openBro(id){
+        $("#myForm1").form("reset");
+        $("#shengid").val(id);
+        $("#myDialog1").dialog({
+            title:'分配经纪人',
+            closed:false   //true 关闭 false 打开
         })
     }
     //修改经纪人
@@ -158,95 +207,31 @@
             },
             error:function(){
                 $.messager.alert("提示消息","分配失败！","info");
+
             }
         })
     }
-    //打开新增对话框
-    function openDig(){
-        //重置表单
-        $("#myForm").form("reset");
+    function updateUser(id,username){
+        if(username==null){
+            $.messager.alert("警告","请先分配经纪人","info");
+            return;
+        }else{
+            //重置表单
+            $("#myForm").form("reset");
 
-        $("#myDialog").dialog({
-            title:'新增用户',
-            closed:false   //true 关闭 false 打开
-        })
-    }
-    //条件查询
-    function searchUSer(){
-        $("#myTable").datagrid("load",{
-            name:$("#name").textbox("getValue"),
-        })
-    }
-    $("#myTable").datagrid({
-        url:"queryUserApply0",
-        columns:
-            [[{field:'check',checkbox:true},
-                {field:'id',title:'编号'},
-                {field:'name',title:'申请人'},
-                {field:'phone',title:'手机号'},
-                {field:'housename',title:'房源'},
-                {field:'applytime',title:'申请时间'},
-                {field:'looktime',title:'看房时间'},
-                {field:'broName',title:'经纪人',formatter:function(value,row,index){
-                        if(value==null){
-                            var str="<a href='javascript:openBro("+row.id+")'>分配</a>"
-                            return str;
-                        }else{
-                            return value;
-                        }
-                    }},
-                {field:'status',title:'状态',formatter:function (value,row,index) {
-                        if(value==1){
-                            return "已处理";
-                        }else if(value==0){
-                            return "未处理";
-                        }
-                    }},
-                {field:'tools',title:'操作',width:100,align:'center',formatter:function(value,row,index){
-                        var str = "<a href='javascript:deleteUser("+row.id+")'>删除</a>";
-                        str+=" | <a href='javascript:openUser("+row.id+")'>修改</a>";
-                        return str;
-                    }}
-            ]],
-        pagination:true,//开启分页
-        pageList:[4,5,6], //初始化页面大小选择列表
-        pageSize:4 , //初始化每页显示条数，默认是10
-        pageNumber:1, //当前页,默认是1
-        fit:true,
-        //pagePosition:"both",
-        loadMsg:"正在努力加载中。。。", //请求后台的提示信息
-        toolbar: "#searchDiv"     //添加工具栏 ： div的id
+            $("#myDialog").dialog({
+                title:'看房反馈',
+                closed:false   //true 关闭 false 打开
+            })
+            $.ajax({
+                url:"updateUser",
+                data:{id:id},
+                type:"post",
+                success:function(){
 
-    })
-    function openBro(id){
-        $("#myForm1").form("reset");
-        $("#shengid").val(id);
-        $("#myDialog1").dialog({
-            title:'分配经纪人',
-            closed:false   //true 关闭 false 打开
-        })
-    }
-    //单个删除
-    function deleteUser(id){
-        //alert(id);
-        $.messager.confirm("提示","是否确认删除！",function(r){
-            if(r){
-                $.ajax({
-                    url:"deleteUserApply",
-                    type:"post",
-                    data:{"ids":id},
-                    success:function(){
-                        //alert("删除成功");
-                        $.messager.alert("提示消息","删除成功！","info");
-                        //刷新页面
-                        searchUSer();
-                    },error:function(){
-                        //alert("删除失败");
-                        $.messager.alert("提示消息","删除失败！","error");
-                    }
-                })
-            }
-        })
+                }
+            })
+        }
     }
 </script>
 </html>

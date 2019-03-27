@@ -41,5 +41,5 @@ public interface ZhyService {
     void delt(Integer kehuid);
 
     //地区
-    List<Circuit> queryAreaByPid(int pid);
+    List<Circuit> queryAreaByPid(Integer pid);
 }

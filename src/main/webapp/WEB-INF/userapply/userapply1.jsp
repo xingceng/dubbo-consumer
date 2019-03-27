@@ -147,7 +147,14 @@
                 {field:'housename',title:'房源'},
                 {field:'applytime',title:'申请时间'},
                 {field:'looktime',title:'看房时间'},
-                {field:'broName',title:'经纪人'},
+                {field:'status',title:'状态',formatter:function (value,row,index) {
+                        if(value==1){
+                            return "已处理";
+                        }else if(value==0){
+                            return "未处理";
+                        }
+                    }},
+                {field:'username',title:'经纪人'},
                 {field:'tools',title:'操作',width:100,align:'center',formatter:function(value,row,index){
                         var str = "<a href='javascript:deleteUser("+row.id+")'>删除</a>";
                         str+=" | <a href='javascript:openUser("+row.id+")'>修改</a>";

@@ -80,10 +80,10 @@
 </div>
 <div id="myDialog1" class="easyui-dialog" style="width:800px;height:500px" data-options="modal:true,collapsible:true,minimizable:true,maximizable:true,resizable:true,buttons:'#myButton1',closed:true,iconCls:'icon-save'">
     <input style="display:none" name="id" id="shengid">
-    <select name="bid" id="brid">
+    <select name="brokerid">
         <option value="-1" selected>请选择
             <c:forEach items="${brolist}" var="h">
-        <option value="${h.id }" ${h.id ==book.houseid?"selected":"" }>${h.broName}</option>
+        <option value="${h.id}">${h.username}</option>
         </c:forEach>
     </select>
 </div>
@@ -139,29 +139,7 @@
             }
         })
     }
-    //修改经纪人
-    function updateBro(){
-        var options=$("#brid option:selected");
-        var brid=options.val();
-        var id=$("#shengid").val();
 
-        $.ajax({
-            url:'updateBro',
-            data:{"id":id,"brid":brid},
-            type:"post",
-            success:function(){
-                $.messager.alert("提示消息","分配成功！","info");
-                //关闭弹框
-                $("#myDialog1").dialog('close');
-                //刷新页面
-                searchUSer();
-            },
-            error:function(){
-                $.messager.alert("提示消息","分配失败！","info");
-
-            }
-        })
-    }
     //打开新增对话框
     function openDig(){
         //重置表单
@@ -188,7 +166,7 @@
                 {field:'housename',title:'房源'},
                 {field:'applytime',title:'申请时间'},
                 {field:'looktime',title:'看房时间'},
-                {field:'broName',title:'经纪人',formatter:function(value,row,index){
+                {field:'username',title:'经纪人',formatter:function(value,row,index){
                         if(value==null){
                             var str="<a href='javascript:openBro("+row.id+")'>分配</a>"
                             return str;

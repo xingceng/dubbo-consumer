@@ -20,7 +20,12 @@
     <script type="text/javascript" src="<%=request.getContextPath() %>/jquery-easyui-1.5/jquery.easyui.min.js"></script>
     <!-- 引文easyui支持中文js -->
     <script type="text/javascript" src="<%=request.getContextPath() %>/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
-
+    <!-- 引入uploadify css js文件 -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/js/uploadify/uploadify.css">
+    <script type="text/javascript" src="<%=request.getContextPath() %>/js/uploadify/jquery.uploadify.min.js"></script>
+    <!-- 引入kindeditor css js文件 -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/js/kindeditor-4.1.10/themes/default/default.css" />
+    <script src="<%=request.getContextPath() %>/js/kindeditor-4.1.10/kindeditor-all.js"></script>
 </head>
 <body>
 <!-- 条件查询 -->
@@ -42,43 +47,32 @@
             <tr>
                 <td>标题</td>
                 <td>
-                    <input class="easyui-datebox" name="title">
+                    <input class="easyui-textbox" name="title">
                 </td>
             </tr>
             <tr>
                 <td>简介</td>
                 <td>
-                    <input class="easyui-textbox" name="content">
+                    <textarea name="content">
+
+                    </textarea>
                 </td>
             </tr>
             <tr>
                 <td>知识类型</td>
                 <td>
-                    <select name="hid">
-                        <option value="-1" selected>请选择
-                            <c:forEach items="${list}" var="h">
-                        <option value="${h.id }" ${h.id ==book.id?"selected":"" }>${h.name}</option>
-                        </c:forEach>
-                    </select>
+                    <input id="kid" class="easyui-combobox" data-options="url:'<%=request.getContextPath() %>/queryKnowByPid?pid=0',valueField:'id',textField:'name'">
+                    <input id="kids" name="kid">
                 </td>
             </tr>
             <tr>
                 <td>封面</td>
-                <td>没有呢</td>
-            </tr>
-            <tr>
-                <td>发布时间</td>
-                <td>
-                    <input class="easyui-textbox" name="dateout">
+                <td><input name="cover" id="hideImg" type="hidden">
+                    <input id="uploadify" type="file">
+                    <div id="fileQueue"></div>
+                    <img id="testimg" width="66">
                 </td>
             </tr>
-            <tr>
-                <td>点赞数</td>
-                <td>
-                    <input class="easyui-textbox" name="click">
-                </td>
-            </tr>
-
         </table>
     </form>
 </div>
@@ -89,6 +83,19 @@
 </div>
 </body>
 <script>
+    $(function(){
+        preFile();
+    })
+
+    $("#kid").combobox({
+        onChange:function(newValue,oldValue){
+            $("#kids").combobox({
+                url:"<%=request.getContextPath() %>/queryKnowByPid?pid="+newValue,
+                valueField:"id",
+                textField:"name"
+            })
+        }
+    })
 
     //修改回显
     function openUser(id){
@@ -112,7 +119,7 @@
     function closeDig(){
         $("#myDialog").dialog('close');
     }
-    //新增、修改用户
+    //新增知识
     function addUser(){
         $("#myForm").form("submit",{
             url:"addBuyHouse",
@@ -188,6 +195,48 @@
                         $.messager.alert("提示消息","删除失败！","error");
                     }
                 })
+            }
+        })
+    }
+
+    //图片控件
+    function preFile() {
+        //上传插件
+        $("#uploadify").uploadify({
+            //插件自带  不可忽略的参数
+            'swf': '<%=request.getContextPath() %>/js/uploadify/uploadify.swf',
+            //前台请求后台的url 不可忽略的参数                //*****要修改路经 !!!!!!!!!
+            'uploader': '<%=request.getContextPath() %>/upload',
+            //给div的进度条加背景 不可忽略
+            'queueID': 'fileQueue',
+            //上传文件文件名 !!!!!!!与后台接口参数名字需要完全一致!!!!!!!!
+            'fileObjName': 'file',
+            //给上传按钮设置文字
+            'buttonText': '上传图片',
+            //设置文件是否自动上传
+            'auto': true,
+            //可以同时选择多个文件 默认为true  不可忽略
+            'multi': false,
+            //上传后队列是否消失
+            'removeCompleted': true,
+            //队列消失时间
+            'removeTimeout': 1,
+            //上传文件的个数，项目中一共可以上传文件的个数
+            'uploadLimit': -1,
+            'onFallback': function () {
+                alert("浏览器不支持,请更换其他浏览器,或打开Flash插件");
+            },
+            //上传失败
+            'onUploadError': function () {
+                alert("上传失败");
+            },
+            //成功回调函数 file：文件对象。data后台输出数据
+            'onUploadSuccess': function (file, data, response) {
+                console.log(data);
+                //给img框赋值进行展示
+                $("#testimg").attr("src", data);
+                //给隐藏的文本框赋值 传到后台
+                $('#hideImg').val(data);
             }
         })
     }

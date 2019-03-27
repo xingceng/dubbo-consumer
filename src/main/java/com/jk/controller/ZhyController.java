@@ -5,10 +5,13 @@ package com.jk.controller;
 import com.jk.model.*;
 import com.jk.service.HouseRwjService;
 import com.jk.service.ZhyService;
+
+import com.jk.utils.OssUpFileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -85,13 +89,6 @@ public class ZhyController {
     }
 
 
-    //新增房源
-    @RequestMapping("addHouse")
-    @ResponseBody
-    public void  addHouse(House house){
-
-        zhyService.addHouse(house);
-    }
 
     @RequestMapping("zhy")
     public String zhy(Model model){
@@ -146,14 +143,36 @@ public class ZhyController {
 
     @RequestMapping("queryAreaByPid")
     @ResponseBody
-    public List<Circuit> queryAreaByPid(int pid){
+    public List<Circuit> queryAreaByPid(Integer pid){
         return zhyService.queryAreaByPid(pid);
     }
 
 
 
 
+    //新增房源
+    @RequestMapping("addHouse")
+    @ResponseBody
+    public void  addHouse(House house){
+        zhyService.addHouse(house);
+    }
 
+
+    //oss上传图片
+    @ResponseBody
+    @RequestMapping("upload")
+    public String upload(MultipartFile file){
+        Map<String, Object> stringObjectMap = OssUpFileUtil.uploadFile(file);
+        String count = "";
+        for(String key : stringObjectMap.keySet()){
+            Object o = stringObjectMap.get(key);
+            System.out.println("key: " + key + " value: " + o);
+            if(key=="url"){
+                count+=o;
+            }
+        }
+        return count;
+    }
 
 
 }

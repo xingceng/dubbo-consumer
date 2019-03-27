@@ -14,15 +14,15 @@ public class UserApply implements Serializable {
     private String looktime;
     private Integer brokerid;
     private Integer status;
-    private String broName;
+    private String username;
     private String housename;
 
-    public String getBroName() {
-        return broName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setBroName(String broName) {
-        this.broName = broName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getHousename() {

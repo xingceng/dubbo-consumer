@@ -50,10 +50,7 @@
                     {field:"id",title:"id"},
                     {field:"phone",title:"手机号"},
                     {field:"email",title:"邮箱"},
-                    {field:"card",title:"身份证"},
-                    {field:"cardimg",title:"身份证图",formatter:function(value,row,index){
-                            return "<img src='"+value+"' width='50px' height='60'/>";
-                        }},
+                    {field:"card",title:"身份证号"},
                     {field:"latedate",title:"到期时间"},
                     {field:"comment",title:"备注"},
                     {field:"status",title:"状态",formatter:function(value,row,index){
@@ -64,9 +61,9 @@
                         }else if(value==1){
                             return "失效";
                         }}},
-                    {field:"brokername",title:"经纪人"},
+                    {field:"username",title:"经纪人"},
                     {field:"price",title:"价格"},
-                    {field:"hname",title:"房屋名称"},
+                    {field:"housename",title:"房屋名称"},
                     {field:"deadline",title:"期限",formatter:function(value,row,index){
                         return value+"年";
                         }},
@@ -78,7 +75,7 @@
         }
         function delheTong(id){
             $.ajax({
-                url:'/delheTong',
+                url:'delheTong',
                 data:{id:id},
                 type:'post',
                 success:function(){

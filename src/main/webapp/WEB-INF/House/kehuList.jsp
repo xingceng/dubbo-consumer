@@ -59,12 +59,11 @@
             <tr>
                 <td>身份证图片</td>
                 <td>
-                    <img width="100px" height="100px" id="add_img" >
-                    <!-- 文件域 上传图片 -->
-                    <input type="file" id="uploadImg">
-                    <!-- 隐藏域 上传图片的路径 -->
-                    <input type="hidden" name="kehucardimg" id="hideImg">
+                    <input name="kehucardimg" id="hideImg" type="hidden">
+                    <input id="uploadify" type="file">
                     <div id="fileQueue"></div>
+                    <img id="testimg" width="66">
+
 
                 </td>
             </tr>
@@ -94,6 +93,53 @@
 
 </body>
 <script>
+
+    $(function(){
+        preFile();
+    })
+
+
+    //图片
+    //杂七杂八start
+    function preFile(){
+//上传插件
+        $("#uploadify").uploadify({
+            //插件自带  不可忽略的参数
+            'swf': '<%=request.getContextPath() %>/js/uploadify/uploadify.swf',
+            //前台请求后台的url 不可忽略的参数                          //*****要修改路经 !!!!!!!!!!!!!!!!!!!!!!!!
+            'uploader':'<%=request.getContextPath() %>/addFiletwo',
+            //给div的进度条加背景 不可忽略
+            'queueID': 'fileQueue',
+            //上传文件文件名 !!!!!!!!!!!!!!!!!!与后台接口参数名字需要完全一致!!!!!!!!!!!!!!!!!!!!!!!!
+            'fileObjName':'headimg',
+            //给上传按钮设置文字
+            'buttonText': '上传图片',
+            //设置文件是否自动上传
+            'auto':true,
+            //可以同时选择多个文件 默认为true  不可忽略
+            'multi':false,
+            //上传后队列是否消失
+            'removeCompleted':true,
+            //队列消失时间
+            'removeTimeout' : 1,
+            //上传文件的个数，项目中一共可以上传文件的个数
+            'uploadLimit':  -1,
+            'onFallback':function(){alert("浏览器不支持,请更换其他浏览器,或打开Flash插件");},
+            //上传失败
+            'onUploadError':function(){
+                alert("上传失败");
+            },
+            //成功回调函数 file：文件对象。data后台输出数据
+            'onUploadSuccess':function(file,data,response){
+                var imgurl = data
+                //给img框赋值进行展示
+                $("#testimg").attr("src",imgurl);
+                //给隐藏的文本框赋值 传到后台
+                $("[name='kehucardimg']").html(data); //改!!!!!!!!!!11111
+            }
+        });
+    }
+    //杂七杂八end
     //查询
     $("#MyTable").datagrid({
         url:"<%=request.getContextPath()%>/querykehu",
@@ -168,43 +214,47 @@
 
 
 
-    $("#uploadImg").uploadify({
-        //插件自带  不可忽略的参数flash插件
-        'swf': '<%=request.getContextPath()%>/js/uploadify/uploadify.swf',
-        //前台请求后台的url 不可忽略的参数
-        'uploader': '<%=request.getContextPath()%>/uploadBookImg',
-        //给div的进度条加背景 不可忽略
-        'queueID': 'fileQueue',
-        //对应controller层上传方法中 接收文件的参数名
-        'fileObjName' : 'image',
-        //给上传按钮设置文字
-        'buttonText': '上传头像',
-        //设置文件是否自动上传
-        'auto': true,
-        //可以同时选择多个文件 默认为true  不可忽略
-        'multi': true,
-        //上传后队列是否消失
-        'removeCompleted': true,
-        //允许上传的文件后缀
-        'fileExt': '*.jpg;*.gif;*.png',
-        //
-        'cancelImg': '<%=request.getContextPath()%>/js/uploadify/uploadify-cancel.png',
-        //队列消失时间
-        'removeTimeout' : 1,
-        //上传文件的个数，项目中一共可以上传文件的个数
-        'uploadLimit':  -1,
-        'fileTypeExts': '*.jpg;*.png',
-        //成功回调函数 file：文件对象。data后台输出数据
-        'onUploadSuccess':function(file,data,response){
-            //alert(file.name+" 路径："+data.imagePath)
-            var imgurl = "http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/"+eval(data);
-            //图片回显， 预览
-            $("#add_img").attr("src",imgurl)
-            // 文本框 回填
-            $('#hideImg').val(imgurl);
-        }
-
-    });
+    //图片控件
+    function preFile() {
+//上传插件
+        $("#uploadify").uploadify({
+            //插件自带  不可忽略的参数
+            'swf': '<%=request.getContextPath() %>/js/uploadify/uploadify.swf',
+            //前台请求后台的url 不可忽略的参数                //*****要修改路经 !!!!!!!!!
+            'uploader': '<%=request.getContextPath() %>/upload',
+            //给div的进度条加背景 不可忽略
+            'queueID': 'fileQueue',
+            //上传文件文件名 !!!!!!!与后台接口参数名字需要完全一致!!!!!!!!
+            'fileObjName': 'file',
+            //给上传按钮设置文字
+            'buttonText': '上传图片',
+            //设置文件是否自动上传
+            'auto': true,
+            //可以同时选择多个文件 默认为true  不可忽略
+            'multi': false,
+            //上传后队列是否消失
+            'removeCompleted': true,
+            //队列消失时间
+            'removeTimeout': 1,
+            //上传文件的个数，项目中一共可以上传文件的个数
+            'uploadLimit': -1,
+            'onFallback': function () {
+                alert("浏览器不支持,请更换其他浏览器,或打开Flash插件");
+            },
+            //上传失败
+            'onUploadError': function () {
+                alert("上传失败");
+            },
+            //成功回调函数 file：文件对象。data后台输出数据
+            'onUploadSuccess': function (file, data, response) {
+                console.log(data);
+                //给img框赋值进行展示
+                $("#testimg").attr("src", data);
+                //给隐藏的文本框赋值 传到后台
+                $('#hideImg').val(data);
+            }
+        })
+    }
 
 
     //单个删除

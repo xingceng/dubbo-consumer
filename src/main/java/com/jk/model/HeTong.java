@@ -16,23 +16,23 @@ public class HeTong implements Serializable {
     private Integer brokerid;
     private String latedate;
     private Integer status;
-    private String  hname;
-    private String brokername;
+    private String housename;
+    private String username;
 
-    public String getHname() {
-        return hname;
+    public String getHousename() {
+        return housename;
     }
 
-    public void setHname(String hname) {
-        this.hname = hname;
+    public void setHousename(String housename) {
+        this.housename = housename;
     }
 
-    public String getBrokername() {
-        return brokername;
+    public String getUsername() {
+        return username;
     }
 
-    public void setBrokername(String brokername) {
-        this.brokername = brokername;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getId() {

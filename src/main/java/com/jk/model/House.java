@@ -32,6 +32,25 @@ public class House implements Serializable {
     private String yongtuname;//用途名
     private String zhuangxiuname;// 装修名
 
+    private String housexiangqing;
+    private String houseimg;
+
+    public String getHousexiangqing() {
+        return housexiangqing;
+    }
+
+    public void setHousexiangqing(String housexiangqing) {
+        this.housexiangqing = housexiangqing;
+    }
+
+    public String getHouseimg() {
+        return houseimg;
+    }
+
+    public void setHouseimg(String houseimg) {
+        this.houseimg = houseimg;
+    }
+
     private Integer cityid;
 
     public Integer getCityid() {

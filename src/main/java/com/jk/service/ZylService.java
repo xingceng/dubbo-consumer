@@ -20,7 +20,7 @@ public interface ZylService {
 
     List<House> queryHouse();
 
-    List<Broker> queryBroker();
+    List<User> queryUser();
 
     List<Knowledge> queryKnowledge();
 
@@ -43,4 +43,8 @@ public interface ZylService {
     HashMap<String, Object> queryBuyHouse(Integer rows, Integer page, BuyHouse b);
 
     void deleteBuyHouse(String ids);
+
+    void updateUser(Integer id);
+    //查询房源id为申请表中的房源id
+    List<House> queryUserApplyHouse(                                                                                                                                                                                                                                                                                                   Integer roleid);
 }

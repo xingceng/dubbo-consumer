@@ -3,6 +3,7 @@ package com.jk.service;
 
 import com.jk.model.*;
 import com.jk.model.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,4 +43,5 @@ public interface HouseRwjService {
     List<Circuit> queryxianlu(Integer id);
 
 
+    String updateHead(MultipartFile file, int i);
 }
